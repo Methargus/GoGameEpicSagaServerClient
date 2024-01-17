@@ -1,0 +1,28 @@
+button {
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    width: 180px;
+    height: 50px;
+}
+
+.join-queue-button {
+    background-color: #4CAF50; /* Green */
+}
+
+.leave-queue-button {
+    background-color: #f44336; /* Red */
+}
+
+container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+span {
+    font-family: 'Montserrat';
+}

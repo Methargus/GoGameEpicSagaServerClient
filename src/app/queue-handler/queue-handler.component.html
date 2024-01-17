@@ -1,0 +1,8 @@
+<div class="container">
+    <button class="join-queue-button" *ngIf="!inQueue" (click)="inQueue=!inQueue">
+        <span>Join Queue</span>
+    </button>
+    <button class="leave-queue-button" *ngIf="inQueue" (click)="inQueue=!inQueue">
+        <span>Leave Queue</span>
+    </button>
+</div>
