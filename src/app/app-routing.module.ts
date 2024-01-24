@@ -5,6 +5,7 @@ import { PageNotFoundComponent } from './shared/components';
 import { HomeRoutingModule } from './home/home-routing.module';
 import { DetailRoutingModule } from './detail/detail-routing.module';
 import { QueueHandlerComponent } from './queue-handler/queue-handler.component';
+import { GameMenuComponent } from './game-menu/game-menu.component';
 
 const routes: Routes = [
   {
@@ -12,9 +13,13 @@ const routes: Routes = [
     component: QueueHandlerComponent,
   },
   {
+    path:'game-menu',
+    component: GameMenuComponent
+  },
+  {
     path: '**',
     component: PageNotFoundComponent
-  }
+  },
 ];
 
 @NgModule({

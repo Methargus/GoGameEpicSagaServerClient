@@ -1,0 +1,30 @@
+<div class="container">
+    <div class="container" *ngIf="!isPlayerBlack" >
+        <h1 style="margin:10vh; text-align: center;">You are White. Choose the board size.</h1>
+        <div class="variants">
+            <div class="variant variant-9x9">
+                <div class="grid-container" [innerHTML]="generateGrid(9) | safeHtmlPipe"></div>
+                
+                <h1>9x9</h1>
+                <button>Choose</button>
+            </div>
+
+            <div class="variant variant-13x13">
+                <div class="grid-container" [innerHTML]="generateGrid(13) | safeHtmlPipe"></div>
+                <h1>13x13</h1>
+                <button>Choose</button>
+            </div>
+
+            <div class="variant variant-19x19">
+                <div class="grid-container" [innerHTML]="generateGrid(19) | safeHtmlPipe"></div>
+                <h1>19x19</h1>
+                <button>Choose</button>
+            </div>
+        </div> 
+    </div>
+
+    <div class="awaiting-other-player-container" *ngIf="isPlayerBlack">
+        The other player is picking the board size
+        <div style="margin-top:25px" class="lds-dual-ring"></div>
+    </div>
+</div>

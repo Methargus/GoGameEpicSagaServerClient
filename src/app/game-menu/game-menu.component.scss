@@ -1,0 +1,111 @@
+.container {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.awaiting-other-player-container {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.variants {
+    flex-wrap: wrap;
+    display:flex;
+    justify-content: space-around;
+    align-items: flex-end;
+}
+
+.variant {
+    display:flex;
+    height:100%;
+    // width:100%;
+    width:330px;
+    padding: 20px;
+    // min-width:0px;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.variant-9x9 {
+    > .grid-container {
+        grid-template-columns: repeat(9, 1fr);
+        grid-template-rows: repeat(9, 1fr);
+    }
+
+}
+
+.variant-13x13 {
+    > .grid-container {
+        grid-template-columns: repeat(13, 1fr);
+        grid-template-rows: repeat(13, 1fr);
+    }
+}
+
+.variant-19x19 {
+    > .grid-container {
+        grid-template-columns: repeat(19, 1fr);
+        grid-template-rows: repeat(19, 1fr);
+    }
+}
+
+.grid-container {
+    display: grid;
+    gap: 0px;
+    width: 100%;
+    // height: 100%;
+    aspect-ratio: 1 / 1;
+}
+
+.go-cell {
+    background-color: #ffffff;
+    border: 1px solid #000;
+}
+
+.lds-dual-ring {
+    display: inline-block;
+    color: black;
+    width: 80px;
+    height: 80px;
+}
+.lds-dual-ring:after {
+    content: " ";
+    display: block;
+    width: 64px;
+    height: 64px;
+    margin: 8px;
+    border-radius: 50%;
+    border: 6px solid #fff;
+    border-color: #000000 transparent #000000 transparent;
+    animation: lds-dual-ring 1.2s linear infinite;
+}
+
+@keyframes lds-dual-ring {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+button {
+    transition: all .5s ease;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    width: 180px;
+    height: 50px;
+    background-color: #4CAF50; /* Green */
+}
+
+button:hover {
+    color: white;
+    background-color: #28732b;
+}
