@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
 export class QueueHandlerComponent {
   constructor(queueService: QueueServiceService, private router: Router) {
     queueService.joinQueue().subscribe(() => {
-      this.router.navigate(['/game-menu'])
+      this.router.navigate(['/game'])
     })
   }
   

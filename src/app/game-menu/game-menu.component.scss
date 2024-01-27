@@ -20,11 +20,8 @@
 
 .variant {
     display:flex;
-    height:100%;
-    // width:100%;
     width:330px;
     padding: 20px;
-    // min-width:0px;
     justify-content: center;
     align-items: center;
     flex-direction: column;
@@ -35,7 +32,6 @@
         grid-template-columns: repeat(9, 1fr);
         grid-template-rows: repeat(9, 1fr);
     }
-
 }
 
 .variant-13x13 {

@@ -13,7 +13,7 @@ const routes: Routes = [
     component: QueueHandlerComponent,
   },
   {
-    path:'game-menu',
+    path:'game',
     component: GameMenuComponent
   },
   {

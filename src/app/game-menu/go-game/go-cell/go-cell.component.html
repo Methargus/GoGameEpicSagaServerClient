@@ -1,0 +1,6 @@
+<div class="go-cell" [id]="'square-'+x+'-'+y">
+    <app-go-cell-field class="wh" [class.other] = "x < boardXSize-1 && y < boardYSize-1"
+                       [class.bottom] = "x < boardXSize-1 && y == boardYSize-1"
+                       [class.right] = "x == boardXSize-1 && y < boardYSize-1"
+                       [class.bottom-right] = "x == boardXSize-1 && y == boardYSize-1" ></app-go-cell-field>
+</div>
