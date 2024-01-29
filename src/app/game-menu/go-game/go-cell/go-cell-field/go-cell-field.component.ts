@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-go-cell-field',
@@ -8,5 +8,12 @@ import { Component } from '@angular/core';
   styleUrl: './go-cell-field.component.scss'
 })
 export class GoCellFieldComponent {
+  @Input() fieldWidth!: number;
+  @Input() fieldHeight!: number;
+  @Input() x!: number;
+  @Input() y!: number;
 
+  placeStone() {
+    console.log("Placed stone at: " + this.x + ", " + this.y)
+  }
 }

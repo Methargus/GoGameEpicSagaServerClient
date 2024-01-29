@@ -15,8 +15,9 @@ export class GoGameComponent {
   coordinates: {x: number, y: number}[] = [];
 
   ngOnInit() {
-    for (let i = 0; i < this.size; i++) {
-      for (let j = 0; j < this.size; j++) {
+    let gameGridCellsSize = this.size-1;
+    for (let i = 0; i < gameGridCellsSize; i++) {
+      for (let j = 0; j < gameGridCellsSize; j++) {
         this.coordinates.push({x: j, y: i});
       }
     }

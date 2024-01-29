@@ -29,22 +29,22 @@
 
 .variant-9x9 {
     > .grid-container {
-        grid-template-columns: repeat(9, 1fr);
-        grid-template-rows: repeat(9, 1fr);
+        grid-template-columns: repeat(8, 1fr);
+        grid-template-rows: repeat(8, 1fr);
     }
 }
 
 .variant-13x13 {
     > .grid-container {
-        grid-template-columns: repeat(13, 1fr);
-        grid-template-rows: repeat(13, 1fr);
+        grid-template-columns: repeat(12, 1fr);
+        grid-template-rows: repeat(12, 1fr);
     }
 }
 
 .variant-19x19 {
     > .grid-container {
-        grid-template-columns: repeat(19, 1fr);
-        grid-template-rows: repeat(19, 1fr);
+        grid-template-columns: repeat(18, 1fr);
+        grid-template-rows: repeat(18, 1fr);
     }
 }
 

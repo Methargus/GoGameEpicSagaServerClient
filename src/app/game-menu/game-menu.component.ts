@@ -18,9 +18,10 @@ export class GameMenuComponent {
   //todo: if player is black then do observcable, that if board size was chosen it moves to the next page
 
   generateGrid(size: number): string {
+    let gamGridCellsSize = size-1;
     let grid = "";
-    for (let i = 0; i < size; i++) {
-      for (let j = 0; j < size; j++) {
+    for (let i = 0; i < gamGridCellsSize; i++) {
+      for (let j = 0; j < gamGridCellsSize; j++) {
         grid += `<div class="go-cell" id="square-${i}-${j}"></div>`;
       }
     }

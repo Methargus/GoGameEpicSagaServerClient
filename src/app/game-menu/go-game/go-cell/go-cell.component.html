@@ -1,6 +1,6 @@
-<div class="go-cell" [id]="'square-'+x+'-'+y">
-    <app-go-cell-field class="wh" [class.other] = "x < boardXSize-1 && y < boardYSize-1"
-                       [class.bottom] = "x < boardXSize-1 && y == boardYSize-1"
-                       [class.right] = "x == boardXSize-1 && y < boardYSize-1"
-                       [class.bottom-right] = "x == boardXSize-1 && y == boardYSize-1" ></app-go-cell-field>
+<div #goCell class="go-cell" [id]="'square-'+x+'-'+y">
+    <app-go-cell-field [fieldWidth]="fieldWidth" [fieldHeight]="fieldHeight" [x]=x [y]=y class="wh other" [style.top.px]="-fieldHeight/2" [style.left.px]="-fieldWidth/2"></app-go-cell-field> <!-- top left-->
+    <app-go-cell-field [fieldWidth]="fieldWidth" [fieldHeight]="fieldHeight" [x]=x+1 [y]=y *ngIf="x == boardXSize-2 && y <= boardYSize-2" class="wh" style="position:absolute" [style.top.px]="-fieldHeight/2" [style.left.px]="width"></app-go-cell-field> <!-- top right, only for righttomest column -->
+    <app-go-cell-field [fieldWidth]="fieldWidth" [fieldHeight]="fieldHeight" [x]=x [y]=y+1 *ngIf="x <= boardXSize-2 && y == boardYSize-2" class="wh" style="position:absolute" [style.left.px]="-fieldWidth/2" [style.top.px]="height"></app-go-cell-field> <!--bottom left, only for bottomest -->
+    <app-go-cell-field [fieldWidth]="fieldWidth" [fieldHeight]="fieldHeight" [x]=x+1 [y]=y+1 *ngIf="x == boardXSize-2 && y == boardYSize-2" class="wh" style="position: absolute" [style.top.px]="height" [style.left.px]="width"></app-go-cell-field> <!-- bottom right, only for bottomest and rightmost -->
 </div>
