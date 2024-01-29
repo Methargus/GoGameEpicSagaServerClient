@@ -1,6 +1,7 @@
 import {app, BrowserWindow, screen} from 'electron';
 import * as path from 'path';
 import * as fs from 'fs';
+import * as net from 'net';
 
 let win: BrowserWindow | null = null;
 const args = process.argv.slice(1),
@@ -50,6 +51,8 @@ function createWindow(): BrowserWindow {
     win = null;
   });
 
+  defineHandlers()
+
   return win;
 }
 
@@ -80,4 +83,65 @@ try {
 } catch (e) {
   // Catch Error
   // throw e;
+}
+
+function defineHandlers() {
+  const client = net.createConnection({ port: 4444, host: 'localhost' }, () => {
+    console.log('Connected to server!');
+  });
+
+  client.on('end', () => {
+    console.log('Disconnected from server');
+  });
+
+  client.on('error', (err) => {
+    console.error('Connection error', err);
+  });
+
+  let clientHash = ""
+  win.webContents.on('did-finish-load', () => {
+    client.on('data', (data) => {
+      console.log(JSON.parse(data.toString()));
+      
+      let parsedData = JSON.parse(data.toString())
+      win.webContents.send(parsedData.eventName, parsedData)
+
+      if(parsedData.eventName == "PlayerAssignEvent") {
+        clientHash = parsedData.clientHash
+      }
+    });  
+  })
+
+  const { ipcMain } = require('electron')
+  ipcMain.on('TestEvent', (event, arg) => {
+    const testData = JSON.stringify({
+      'eventName': 'TestEvent',
+      'avedakedavra': "harry potter real wtf??? borzoi reference?!",
+      'clientHash': clientHash
+    })
+
+    client.write(testData+"\n")
+    
+    // event.reply('gameBoardSize', 'pong')
+  })
+
+  ipcMain.on('JoinQueueMessageModel', (event, arg) => {
+    const data = JSON.stringify({
+      'eventName': 'JoinQueueEvent',
+      'size': arg.size,
+      'type': "pvp",
+      'clientHash': clientHash
+    })
+
+    client.write(data+"\n")
+  })
+
+  ipcMain.on('LeaveQueueMessageModel', (event, arg) => {
+    const data = JSON.stringify({
+      'eventName': 'LeaveQueueEvent',
+      'clientHash': clientHash
+    })
+
+    client.write(data+"\n")
+  })
 }

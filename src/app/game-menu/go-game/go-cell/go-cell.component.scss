@@ -1,5 +1,5 @@
 .go-cell {
-    background-color: #ffffff;
+    background-color: #82583f;
     border: 1px solid #000;
     width:100%;
     height:100%;
@@ -8,46 +8,27 @@
 
 .wh {
     display:inline-block;
-    // width: 100%;
-    // height: 100%;
 }
 
 .other {
-    // display: flex;
-    // justify-content: left;
-    // align-items: start;
-    
-    // position:relative;
     position: absolute;
     left:0px;
     top:0px;
 }
 
-.bottom {
-    // display: flex;
-    // justify-content: left;
-    // align-items: end;
-    
+.bottom {    
     position:relative;
     top:10px;
     left:-10px;
 }
 
 .right {
-    // display: flex;
-    // justify-content: end;
-    // align-items: start;
-    
     position: relative;
     top:-10px;
     left:10px;
 }
 
 .bottom-right {
-    // display: flex;
-    // justify-content: end;
-    // align-items: end;
-    
     position:relative;
     top:10px;
     left:10px;
