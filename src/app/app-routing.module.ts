@@ -6,15 +6,16 @@ import { HomeRoutingModule } from './home/home-routing.module';
 import { DetailRoutingModule } from './detail/detail-routing.module';
 import { QueueHandlerComponent } from './queue-handler/queue-handler.component';
 import { GameMenuComponent } from './game-menu/game-menu.component';
+import { GoGameComponent } from './game-menu/go-game/go-game.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: QueueHandlerComponent,
+    component: GameMenuComponent,
   },
   {
     path:'game',
-    component: GameMenuComponent
+    component: GoGameComponent
   },
   {
     path: '**',

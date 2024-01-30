@@ -1,8 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { SafeHtmlPipePipe } from "../shared/safe-html-pipe.pipe";
 import { Observable } from 'rxjs';
 import { GoGameComponent } from "./go-game/go-game.component";
+import { ipcRenderer } from 'electron/renderer';
+import { ElectronService } from '../core/services';
+import { Router } from '@angular/router';
+import { GameService } from './game.service';
 
 @Component({
     selector: 'app-game-menu',
@@ -12,10 +16,9 @@ import { GoGameComponent } from "./go-game/go-game.component";
     encapsulation: ViewEncapsulation.None,
     imports: [CommonModule, SafeHtmlPipePipe, GoGameComponent]
 })
-export class GameMenuComponent {
-  isPlayerBlack = false;
-  gameBoardSize: Observable<number> = null!;
-  //todo: if player is black then do observcable, that if board size was chosen it moves to the next page
+export class GameMenuComponent implements OnInit {
+  gameBoardSize: number = null!;
+  inQueue = false
 
   generateGrid(size: number): string {
     let gamGridCellsSize = size-1;
@@ -28,10 +31,31 @@ export class GameMenuComponent {
     return grid;
   }
 
-  chooseBoardSize(size: number) {
-    //push to gameBoardSize size
-    this.gameBoardSize = new Observable<number>(observer => {
-      observer.next(size)
+  constructor(private gameService: GameService, private router: Router) {}
+
+  ngOnInit() {
+    this.gameService.isInQueue().subscribe(gameStartMessageModel => {
+      localStorage.setItem('playerColor', gameStartMessageModel.playerColor)
+      localStorage.setItem('boardSize', gameStartMessageModel.boardSize.toString())
+      this.redirect()
     })
+  }
+
+  chooseBoardSize(size: number) {
+    this.gameBoardSize = size;
+  }
+
+  joinQueue() {
+    this.inQueue = true
+    this.gameService.sendJoinQueueRequest(this.gameBoardSize)
+  }
+
+  leaveQueue() {
+    this.inQueue = false
+    this.gameService.sendLeaveQueueRequest()
+  }
+
+  redirect() {
+    this.router.navigate(['/game'])
   }
 }

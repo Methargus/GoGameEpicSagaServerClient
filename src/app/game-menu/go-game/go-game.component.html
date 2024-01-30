@@ -1,8 +1,12 @@
 <div class="game-container">
     <div style="height:80%; aspect-ratio: 1 / 1;">
-        <div class="game-board" [class]="'variant-' + size + 'x' + size">
-            <div class="grid-container">
-                <app-go-cell *ngFor="let coordinate of coordinates" [x]="coordinate.x" [y]="coordinate.y" [boardXSize]="size" [boardYSize]="size"></app-go-cell>
+        <div style="border: 25px solid" [style.border-color]="playerColor">
+            <div style="border: 50px solid #543827;">
+                <div class="game-board" [class]="'variant-' + size + 'x' + size">
+                    <div class="grid-container">
+                        <app-go-cell *ngFor="let coordinate of coordinates" [x]="coordinate.x" [y]="coordinate.y" [boardXSize]="size" [boardYSize]="size"></app-go-cell>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

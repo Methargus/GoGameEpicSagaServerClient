@@ -1,6 +1,5 @@
-<div *ngIf="!(gameBoardSize | async)" class="container">
-    <div class="container" *ngIf="!isPlayerBlack" >
-        <h1 style="margin:10vh; text-align: center;">You are White. Choose the board size.</h1>
+<div class="menu">
+    <div class="container">
         <div class="variants">
             <div class="variant variant-9x9">
                 <div class="grid-container" [innerHTML]="generateGrid(9) | safeHtmlPipe"></div>
@@ -23,10 +22,13 @@
         </div> 
     </div>
 
-    <div class="awaiting-other-player-container" *ngIf="isPlayerBlack">
-        The other player is picking the board size
-        <div style="margin-top:25px" class="lds-dual-ring"></div>
+    <div class="container" style="margin-top: 70px">
+        <button class="join-queue-button" *ngIf="!inQueue" (click)="joinQueue()">
+            <span>Join Queue</span>
+        </button>
+        <button class="leave-queue-button" *ngIf="inQueue" (click)="leaveQueue()">
+            <span>Leave Queue</span>
+        </button>
     </div>
 </div>
-
-<app-go-game style="width:100%; height:100%;" *ngIf="(gameBoardSize | async) as size" [size]="size"></app-go-game>
+<!-- <app-go-game style="width:100%; height:100%;" *ngIf="(gameBoardSize | async) as size" [size]="size"></app-go-game> -->

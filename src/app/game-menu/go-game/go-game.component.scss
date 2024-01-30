@@ -5,6 +5,13 @@
 }
 
 .game-container {
+    // background-color: #645044;
+    background-image: url('../../../assets/wood.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    flex-direction: column;
     display:flex;
     justify-content: center;
     align-items: center;
@@ -13,9 +20,82 @@
 }
 
 .game-board {
+    // border: 50px solid #543827;
     display:flex;
     width:100%;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+}
+
+.menu {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+}
+
+.container {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.awaiting-other-player-container {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.variants {
+    flex-wrap: wrap;
+    display:flex;
+    justify-content: space-around;
+    align-items: flex-end;
+}
+
+.variant {
+    display:flex;
+    width:330px;
+    padding: 20px;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.variant-9x9 {
+    > .grid-container {
+        grid-template-columns: repeat(8, 1fr);
+        grid-template-rows: repeat(8, 1fr);
+    }
+}
+
+.variant-13x13 {
+    > .grid-container {
+        grid-template-columns: repeat(12, 1fr);
+        grid-template-rows: repeat(12, 1fr);
+    }
+}
+
+.variant-19x19 {
+    > .grid-container {
+        grid-template-columns: repeat(18, 1fr);
+        grid-template-rows: repeat(18, 1fr);
+    }
+}
+
+.grid-container {
+    display: grid;
+    gap: 0px;
+    width: 100%;
+    // height: 100%;
+    aspect-ratio: 1 / 1;
+}
+
+.go-cell {
+    background-color: #ffffff;
+    border: 1px solid #000;
 }
