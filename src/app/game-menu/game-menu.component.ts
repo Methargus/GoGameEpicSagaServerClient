@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { SafeHtmlPipePipe } from "../shared/safe-html-pipe.pipe";
-import { Observable } from 'rxjs';
+import { Observable, first } from 'rxjs';
 import { GoGameComponent } from "./go-game/go-game.component";
 import { ipcRenderer } from 'electron/renderer';
 import { ElectronService } from '../core/services';
@@ -19,6 +19,7 @@ import { GameService } from './game.service';
 export class GameMenuComponent implements OnInit {
   gameBoardSize: number = null!;
   inQueue = false
+  pvp = true
 
   generateGrid(size: number): string {
     let gamGridCellsSize = size-1;
@@ -34,7 +35,7 @@ export class GameMenuComponent implements OnInit {
   constructor(private gameService: GameService, private router: Router) {}
 
   ngOnInit() {
-    this.gameService.isInQueue().subscribe(gameStartMessageModel => {
+    this.gameService.isInQueue().pipe(first()).subscribe(gameStartMessageModel => {
       localStorage.setItem('playerColor', gameStartMessageModel.playerColor)
       localStorage.setItem('boardSize', gameStartMessageModel.boardSize.toString())
       this.redirect()
@@ -47,7 +48,8 @@ export class GameMenuComponent implements OnInit {
 
   joinQueue() {
     this.inQueue = true
-    this.gameService.sendJoinQueueRequest(this.gameBoardSize)
+    console.log(this.pvp)
+    this.gameService.sendJoinQueueRequest(this.gameBoardSize, this.pvp)
   }
 
   leaveQueue() {

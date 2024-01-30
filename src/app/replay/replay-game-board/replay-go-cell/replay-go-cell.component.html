@@ -1,0 +1,6 @@
+<div #goCell class="go-cell" [id]="'square-'+x+'-'+y">
+    <app-replay-go-cell-field [playerColor]="getPlayerColor(x,y)" [fieldWidth]="fieldWidth" [fieldHeight]="fieldHeight" class="wh other" [style.top.px]="-fieldHeight/2" [style.left.px]="-fieldWidth/2"></app-replay-go-cell-field> <!-- top left-->
+    <app-replay-go-cell-field [playerColor]="getPlayerColor(x+1,y)" [fieldWidth]="fieldWidth" [fieldHeight]="fieldHeight" *ngIf="x == boardXSize-2 && y <= boardYSize-2" class="wh" style="position:absolute" [style.top.px]="-fieldHeight/2" [style.left.px]="width"></app-replay-go-cell-field> <!-- top right, only for righttomest column -->
+    <app-replay-go-cell-field [playerColor]="getPlayerColor(x,y+1)" [fieldWidth]="fieldWidth" [fieldHeight]="fieldHeight" *ngIf="x <= boardXSize-2 && y == boardYSize-2" class="wh" style="position:absolute" [style.left.px]="-fieldWidth/2" [style.top.px]="height"></app-replay-go-cell-field> <!--bottom left, only for bottomest -->
+    <app-replay-go-cell-field [playerColor]="getPlayerColor(x+1,y+1)" [fieldWidth]="fieldWidth" [fieldHeight]="fieldHeight" *ngIf="x == boardXSize-2 && y == boardYSize-2" class="wh" style="position: absolute" [style.top.px]="height" [style.left.px]="width"></app-replay-go-cell-field> <!-- bottom right, only for bottomest and rightmost -->
+</div>

@@ -1,6 +1,8 @@
 import { Component, Input, ViewEncapsulation } from '@angular/core';
 import { GoCellComponent } from "./go-cell/go-cell.component";
 import { CommonModule } from '@angular/common';
+import { GameService } from '../game.service';
+import { first } from 'rxjs';
 
 @Component({
     selector: 'app-go-game',
@@ -15,6 +17,8 @@ export class GoGameComponent {
   grid!: string;
   coordinates: {x: number, y: number}[] = [];
 
+  constructor(private gameService: GameService) {}
+
   ngOnInit() {
     this.size = parseInt(localStorage.getItem('boardSize')!);
     this.playerColor = localStorage.getItem('playerColor')!;
@@ -24,5 +28,19 @@ export class GoGameComponent {
         this.coordinates.push({x: j, y: i});
       }
     }
+
+    this.gameService.getGameEndStatistics().pipe(first()).subscribe(model => {
+      console.log("HELLO")
+      model.winnerColor == this.playerColor ? alert("You won!") : alert("You lost!")
+    })
+  }
+
+  pass() {
+    this.gameService.pass();
+  }
+
+  giveUp() {
+    this.gameService.giveUp();
+    console.log("BRUH")
   }
 }

@@ -9,8 +9,8 @@ export class GameService {
 
   constructor(private electronService: ElectronService ) { }
 
-  sendJoinQueueRequest(boardSize: number) {
-    this.electronService.ipcRenderer.send('JoinQueueMessageModel', { size: boardSize });
+  sendJoinQueueRequest(boardSize: number, pvp: boolean) {
+    this.electronService.ipcRenderer.send('JoinQueueMessageModel', { size: boardSize, type: pvp ? "pvp": "pve"});
   }
 
   sendLeaveQueueRequest() {
@@ -43,6 +43,22 @@ export class GameService {
       })
     })
   }
+
+  pass() {
+    this.electronService.ipcRenderer.send('PassMessageModel', {pass: true});
+  }
+
+  giveUp() {
+    this.electronService.ipcRenderer.send('GiveUpMessageModel', {giveUp: true});
+  }
+
+  getGameEndStatistics() : Observable<{ winnerColor: string, blackScore: number, whiteScore: number }> {
+    return new Observable(subscriber => {
+      this.electronService.ipcRenderer.on('GameEndStatisticsEvent', (event, arg) => {
+        subscriber.next({ winnerColor: arg.winnerColor, blackScore: arg.blackScore, whiteScore: arg.whiteScore })
+      })
+    })
+  }
 }
 
 interface GameStartMessageModel {
@@ -52,6 +68,5 @@ interface GameStartMessageModel {
 
 interface GameBoardMessageModel {
   board: number[][]
-  // playerColor: string
-  // boardSize: number
 }
+

@@ -1,0 +1,23 @@
+.bruh {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.dot {
+    border-radius: 50%;
+    width: 100%;
+    height: 100%;
+}
+
+.black {
+    background-image: url('../../../../../assets/blackjpg.jpg'); //todo: todo:.
+}
+
+.white {
+    background-image: url('../../../../../assets/white.jpg');
+}
+
+.none {
+    background-color: #ffffff00;
+}

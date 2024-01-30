@@ -1,0 +1,11 @@
+<div class="container">
+    <div style="height:100%; aspect-ratio: 1 / 1;">
+        <div style="border: 50px solid #543827;">
+            <div class="game-board" [class]="'variant-' + size + 'x' + size">
+                <div class="grid-container">
+                    <app-replay-go-cell *ngFor="let coordinate of coordinates" [x]="coordinate.x" [y]="coordinate.y" [boardXSize]="size" [boardYSize]="size" [board]="board"></app-replay-go-cell>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

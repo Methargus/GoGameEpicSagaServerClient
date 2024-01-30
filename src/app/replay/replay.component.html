@@ -1,8 +1,25 @@
 <div class="container">
-    <div>
-        <input class="styled-input">
-        <button>Launch Replay</button>
+    <h1 style="text-align: center;">Input GameId to watch the Replay</h1>
+    <div style="position:relative">
+        <!-- <div style="position: relative; left:50%">
+            <div style="position: relative; display: inline-block; left:-200px">
+                <button (click)="launchReplay()" style="position: relative; left:-140px; margin-left: 40px;">Launch Replay</button>
+                <button (click)="launchReplay()" style="position: relative; left:-140px; margin-left: 40px;">Launch Replay</button>
+            </div>
+            <input [(ngModel)]="inputValue" class="styled-input">
+            <button (click)="launchReplay()" style="position: relative; left:-140px; margin-left: 40px;">Launch Replay</button>
+        </div> -->
+        <div style="display:flex; justify-content: center;">
+            <div style="display: inline-block;">
+                <button [disabled]="!inputValue || !replayLaunched" [class.disabled]="!inputValue || !replayLaunched" class="arrow-button" (click)="previousTurn()"><div class="arrow left"></div></button>
+                <button [disabled]="!inputValue || !replayLaunched" [class.disabled]="!inputValue || !replayLaunched" class="arrow-button" (click)="nextTurn()"><div class="arrow right"></div></button>
+            </div>
+            <input [(ngModel)]="inputValue" class="styled-input">
+            <button (click)="launchReplay()">Launch Replay</button>
+        </div>
+
     </div>
-        <div style="height:80%; aspect-ratio: 1 / 1;">
+    <div style="margin-top:30px; height:80%;width:100%">
+        <app-replay-game-board [requestBoardOfGivenTurn]="parentEvent" [gameHash]="inputValue"></app-replay-game-board>
     </div>
 </div>

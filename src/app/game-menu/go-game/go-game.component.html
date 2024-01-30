@@ -1,4 +1,8 @@
 <div class="game-container">
+    <div style="display:flex; width:50vh; justify-content: space-between; margin-bottom:30px;">
+        <button (click)="pass()">Pass</button>
+        <button (click)="giveUp()" class="give-up">Give Up</button>
+    </div>
     <div style="height:80%; aspect-ratio: 1 / 1;">
         <div style="border: 25px solid" [style.border-color]="playerColor">
             <div style="border: 50px solid #543827;">

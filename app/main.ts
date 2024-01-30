@@ -130,7 +130,7 @@ function defineHandlers() {
     const data = JSON.stringify({
       'eventName': 'JoinQueueEvent',
       'size': arg.size,
-      'type': "pvp",
+      'type': arg.type,
       'clientHash': clientHash
     })
 
@@ -152,6 +152,37 @@ function defineHandlers() {
       'row': arg.x,
       'col': arg.y,
       'clientHash': clientHash
+    })
+
+    client.write(data+"\n")
+  })
+
+  ipcMain.on('ReadGameTurnFromDbEvent', (event, arg) => {
+    const data = JSON.stringify({
+      'eventName': 'ReadGameTurnFromDbEvent',
+      'clientHash': clientHash,
+      'gameHash': arg.gameHash,
+      'turnNumber': arg.turnNumber
+    })
+
+    client.write(data+"\n")
+  })
+
+  ipcMain.on('PassMessageModel', (event, arg) => {
+    const data = JSON.stringify({
+      'eventName': 'PlayerPassEvent',
+      'clientHash': clientHash,
+      'pass': arg.pass
+    })
+
+    client.write(data+"\n")
+  })
+
+  ipcMain.on('GiveUpMessageModel', (event, arg) => {
+    const data = JSON.stringify({
+      'eventName': 'PlayerGiveUpEvent',
+      'clientHash': clientHash,
+      'giveUp': arg.giveUp
     })
 
     client.write(data+"\n")

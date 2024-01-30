@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
   styleUrl: './home-menu.component.scss'
 })
 export class HomeMenuComponent {
-  constructor(private router: Router) {}
+  constructor(private router: Router) { }
 
   redirectToReplay() {
     this.router.navigate(['/replay'])
