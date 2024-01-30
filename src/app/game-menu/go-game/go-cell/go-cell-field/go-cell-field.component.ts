@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input } from '@angular/core';
+import { GameService } from '../../../game.service';
 
 @Component({
   selector: 'app-go-cell-field',
@@ -17,12 +18,19 @@ export class GoCellFieldComponent {
 
   wasClicked = false;
 
+  constructor(private gameService: GameService, private cdr: ChangeDetectorRef) {}
+
   ngOnInit() {
     this.playerColor = localStorage.getItem('playerColor')!;
+    this.gameService.getGameBoard().subscribe(model => {
+      this.wasClicked = model.board[this.x][this.y] != 0
+      if(model.board[this.x][this.y] == -1) this.playerColor = "black"
+      if(model.board[this.x][this.y] == 1) this.playerColor = "white"
+      this.cdr.detectChanges();
+    })
   }
-  
-  placeStone() {
-    console.log("Placed stone at: " + this.x + ", " + this.y)
-    this.wasClicked = true;
+
+  placeStone() {  
+    this.gameService.placeStone(this.x, this.y)
   }
 }

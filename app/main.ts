@@ -99,12 +99,13 @@ function defineHandlers() {
   });
 
   let clientHash = ""
-  win.webContents.on('did-finish-load', () => {
+  win!.webContents.on('did-finish-load', () => {
     client.on('data', (data) => {
-      console.log(JSON.parse(data.toString()));
+      console.log(data.toString());
+      // console.log(JSON.parse(data.toString()));
       
       let parsedData = JSON.parse(data.toString())
-      win.webContents.send(parsedData.eventName, parsedData)
+      win!.webContents.send(parsedData.eventName, parsedData)
 
       if(parsedData.eventName == "PlayerAssignEvent") {
         clientHash = parsedData.clientHash
@@ -139,6 +140,17 @@ function defineHandlers() {
   ipcMain.on('LeaveQueueMessageModel', (event, arg) => {
     const data = JSON.stringify({
       'eventName': 'LeaveQueueEvent',
+      'clientHash': clientHash
+    })
+
+    client.write(data+"\n")
+  })
+
+  ipcMain.on('PlaceStoneMessageModel', (event, arg) => {
+    const data = JSON.stringify({
+      'eventName': 'PlaceStoneEvent',
+      'row': arg.x,
+      'col': arg.y,
       'clientHash': clientHash
     })
 

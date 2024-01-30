@@ -11,13 +11,13 @@ import { CommonModule } from '@angular/common';
 })
 export class GoGameComponent {
   size!: number;
-
+  playerColor!: string;
   grid!: string;
   coordinates: {x: number, y: number}[] = [];
 
   ngOnInit() {
     this.size = parseInt(localStorage.getItem('boardSize')!);
-      
+    this.playerColor = localStorage.getItem('playerColor')!;
     let gameGridCellsSize = this.size-1;
     for (let i = 0; i < gameGridCellsSize; i++) {
       for (let j = 0; j < gameGridCellsSize; j++) {
