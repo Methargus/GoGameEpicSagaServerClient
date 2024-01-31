@@ -1,14 +1,8 @@
+<app-go-home-button warningText="Are you sure?"></app-go-home-button>
+
 <div class="container">
     <h1 style="text-align: center;">Input GameId to watch the Replay</h1>
     <div style="position:relative">
-        <!-- <div style="position: relative; left:50%">
-            <div style="position: relative; display: inline-block; left:-200px">
-                <button (click)="launchReplay()" style="position: relative; left:-140px; margin-left: 40px;">Launch Replay</button>
-                <button (click)="launchReplay()" style="position: relative; left:-140px; margin-left: 40px;">Launch Replay</button>
-            </div>
-            <input [(ngModel)]="inputValue" class="styled-input">
-            <button (click)="launchReplay()" style="position: relative; left:-140px; margin-left: 40px;">Launch Replay</button>
-        </div> -->
         <div style="display:flex; justify-content: center;">
             <div style="display: inline-block;">
                 <button [disabled]="!inputValue || !replayLaunched" [class.disabled]="!inputValue || !replayLaunched" class="arrow-button" (click)="previousTurn()"><div class="arrow left"></div></button>

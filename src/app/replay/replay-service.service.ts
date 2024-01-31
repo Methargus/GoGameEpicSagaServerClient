@@ -7,11 +7,9 @@ import { Observable } from 'rxjs';
 })
 export class ReplayService {
 
-  constructor(private electronService: ElectronService) { }
+  constructor(private electronService: ElectronService) {  }
 
   getGameBoardOfGivenTurn(gameHash: string, turnNumber: number): Observable<{board: number[][]}> {
-    console.log(gameHash, turnNumber)
-
     this.electronService.ipcRenderer.send('ReadGameTurnFromDbEvent', { 'gameHash': gameHash, 'turnNumber': turnNumber });
   
     return new Observable(subscriber => {
