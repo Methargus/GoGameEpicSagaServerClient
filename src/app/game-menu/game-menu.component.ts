@@ -1,11 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, NgZone, OnInit, ViewEncapsulation } from '@angular/core';
 import { SafeHtmlPipePipe } from "../shared/safe-html-pipe.pipe";
 import { first } from 'rxjs';
 import { GoGameComponent } from "./go-game/go-game.component";
 import { Router } from '@angular/router';
 import { GameService } from './game.service';
-import { GoHomeButtonComponent } from "../go-home-button/go-home-button.component";
 
 @Component({
     selector: 'app-game-menu',
@@ -13,7 +12,7 @@ import { GoHomeButtonComponent } from "../go-home-button/go-home-button.componen
     templateUrl: './game-menu.component.html',
     styleUrl: './game-menu.component.scss',
     encapsulation: ViewEncapsulation.None,
-    imports: [CommonModule, SafeHtmlPipePipe, GoGameComponent, GoHomeButtonComponent]
+    imports: [CommonModule, SafeHtmlPipePipe, GoGameComponent ]
 })
 export class GameMenuComponent implements OnInit {
   gameBoardSize: number = null!;
@@ -31,7 +30,7 @@ export class GameMenuComponent implements OnInit {
     return grid;
   }
 
-  constructor(private gameService: GameService, private router: Router) {}
+  constructor(private gameService: GameService, private router: Router, private ngZone: NgZone) {}
 
   ngOnInit() {
     this.gameService.isInQueue().pipe(first()).subscribe(gameStartMessageModel => {
@@ -57,6 +56,8 @@ export class GameMenuComponent implements OnInit {
   }
 
   redirect() {
-    this.router.navigate(['/game'])
+    this.ngZone.run(() => {
+      this.router.navigate(['/game']);
+    });
   }
 }

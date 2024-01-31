@@ -19,7 +19,7 @@ export class GoCellFieldComponent implements OnDestroy {
 
   wasClicked = false;
   subscribe: Subscription;
-  constructor(private gameService: GameService, private cdr: ChangeDetectorRef) {}
+  constructor(private gameService: GameService, private cdr: ChangeDetectorRef) { require('events').EventEmitter.defaultMaxListeners = 0; }
 
   ngOnInit() {
     this.playerColor = localStorage.getItem('playerColor')!;

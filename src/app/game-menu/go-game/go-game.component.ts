@@ -1,4 +1,4 @@
-import { Component, Input, ViewEncapsulation } from '@angular/core';
+import { Component } from '@angular/core';
 import { GoCellComponent } from "./go-cell/go-cell.component";
 import { CommonModule } from '@angular/common';
 import { GameService } from '../game.service';
@@ -31,7 +31,6 @@ export class GoGameComponent {
     }
 
     this.gameService.getGameEndStatistics().pipe(first()).subscribe(model => {
-      console.log("HELLO")
       model.winnerColor == this.playerColor ? alert("You won!") : alert("You lost!")
     })
   }
@@ -42,6 +41,5 @@ export class GoGameComponent {
 
   giveUp() {
     this.gameService.giveUp();
-    console.log("BRUH")
   }
 }
