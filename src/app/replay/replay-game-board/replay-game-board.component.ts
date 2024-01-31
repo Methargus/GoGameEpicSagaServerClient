@@ -37,9 +37,9 @@ export class ReplayGameBoardComponent implements OnDestroy {
         for (let i = 0; i < this.size-1; i++) {
           for (let j = 0; j < this.size-1; j++) {
             // if(this.coordinates.length == 0) this.coordinates.push({x: j, y: i});
-            console.log(this.coordinates[i*(this.size-1) + j])
+            // console.log(this.coordinates[i*(this.size-1) + j])
             this.coordinates[i*(this.size-1) + j] = {x: j, y: i};
-            console.log(this.coordinates[i*(this.size-1) + j])
+            // console.log(this.coordinates[i*(this.size-1) + j])
 
           }
         }

@@ -1,12 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { SafeHtmlPipePipe } from "../shared/safe-html-pipe.pipe";
-import { Observable, first } from 'rxjs';
+import { first } from 'rxjs';
 import { GoGameComponent } from "./go-game/go-game.component";
-import { ipcRenderer } from 'electron/renderer';
-import { ElectronService } from '../core/services';
 import { Router } from '@angular/router';
 import { GameService } from './game.service';
+import { GoHomeButtonComponent } from "../go-home-button/go-home-button.component";
 
 @Component({
     selector: 'app-game-menu',
@@ -14,7 +13,7 @@ import { GameService } from './game.service';
     templateUrl: './game-menu.component.html',
     styleUrl: './game-menu.component.scss',
     encapsulation: ViewEncapsulation.None,
-    imports: [CommonModule, SafeHtmlPipePipe, GoGameComponent]
+    imports: [CommonModule, SafeHtmlPipePipe, GoGameComponent, GoHomeButtonComponent]
 })
 export class GameMenuComponent implements OnInit {
   gameBoardSize: number = null!;

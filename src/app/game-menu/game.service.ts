@@ -66,7 +66,7 @@ interface GameStartMessageModel {
   boardSize: number
 }
 
-interface GameBoardMessageModel {
+export interface GameBoardMessageModel {
   board: number[][]
 }
 

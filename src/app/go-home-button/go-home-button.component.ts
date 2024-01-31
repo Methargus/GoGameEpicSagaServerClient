@@ -1,5 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
+import { first } from 'rxjs';
+import { ConfirmGoHomeDialogComponent } from './confirm-go-home-dialog/confirm-go-home-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-go-home-button',
@@ -9,14 +12,23 @@ import { Router } from '@angular/router';
   styleUrl: './go-home-button.component.scss'
 })
 export class GoHomeButtonComponent {
-  constructor(private router: Router) { }
+  constructor(private router: Router, public dialog: MatDialog) { }
   @Input() warningText!: string;
 
   redirectHome() {
+    if(!this.warningText) this.router.navigate(['/']);
     if(this.warningText) {
-      if(!window.confirm(this.warningText)) return
-    }
+      const dialogRef = this.dialog.open(ConfirmGoHomeDialogComponent, {
+        data: { message: this.warningText },
+        width: '500px',
+        height: '350px'
+      });
 
-    this.router.navigate(['/'])
+      dialogRef.afterClosed().pipe(first()).subscribe(result => {
+        if(result) {
+          this.router.navigate(['/']);
+        }
+      });
+    }
   }
 }

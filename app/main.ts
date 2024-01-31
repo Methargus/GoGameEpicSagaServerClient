@@ -51,6 +51,8 @@ function createWindow(): BrowserWindow {
     win = null;
   });
 
+  require('events').EventEmitter.prototype._maxListeners = 0
+  process.setMaxListeners(0);
   defineHandlers()
 
   return win;
@@ -102,9 +104,8 @@ function defineHandlers() {
   win!.webContents.on('did-finish-load', () => {
     client.on('data', (data) => {
       console.log(data.toString());
-      // console.log(JSON.parse(data.toString()));
-      
-      let parsedData = JSON.parse(data.toString())
+
+      let parsedData = JSON.parse(data.toString().split("#END_JSON#")[0])
       win!.webContents.send(parsedData.eventName, parsedData)
 
       if(parsedData.eventName == "PlayerAssignEvent") {
@@ -147,6 +148,7 @@ function defineHandlers() {
   })
 
   ipcMain.on('PlaceStoneMessageModel', (event, arg) => {
+    console.log("SENT DATA")
     const data = JSON.stringify({
       'eventName': 'PlaceStoneEvent',
       'row': arg.x,

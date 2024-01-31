@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnDestroy } from '@angular/core';
 import { GameService } from '../../../game.service';
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-go-cell-field',
@@ -9,7 +10,7 @@ import { GameService } from '../../../game.service';
   templateUrl: './go-cell-field.component.html',
   styleUrl: './go-cell-field.component.scss'
 })
-export class GoCellFieldComponent {
+export class GoCellFieldComponent implements OnDestroy {
   @Input() fieldWidth!: number;
   @Input() fieldHeight!: number;
   @Input() x!: number;
@@ -17,17 +18,21 @@ export class GoCellFieldComponent {
   @Input() playerColor!: string;
 
   wasClicked = false;
-
+  subscribe: Subscription;
   constructor(private gameService: GameService, private cdr: ChangeDetectorRef) {}
 
   ngOnInit() {
     this.playerColor = localStorage.getItem('playerColor')!;
-    this.gameService.getGameBoard().subscribe(model => {
+    this.subscribe = this.gameService.getGameBoard().subscribe(model => {
       this.wasClicked = model.board[this.x][this.y] != 0
       if(model.board[this.x][this.y] == -1) this.playerColor = "black"
       if(model.board[this.x][this.y] == 1) this.playerColor = "white"
       this.cdr.detectChanges();
     })
+  }
+
+  ngOnDestroy() {
+    this.subscribe.unsubscribe();
   }
 
   placeStone() {  

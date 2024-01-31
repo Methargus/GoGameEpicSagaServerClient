@@ -3,13 +3,14 @@ import { GoCellComponent } from "./go-cell/go-cell.component";
 import { CommonModule } from '@angular/common';
 import { GameService } from '../game.service';
 import { first } from 'rxjs';
+import { GoHomeButtonComponent } from "../../go-home-button/go-home-button.component";
 
 @Component({
     selector: 'app-go-game',
     standalone: true,
     templateUrl: './go-game.component.html',
     styleUrl: './go-game.component.scss',
-    imports: [CommonModule, GoCellComponent]
+    imports: [CommonModule, GoCellComponent, GoHomeButtonComponent]
 })
 export class GoGameComponent {
   size!: number;
