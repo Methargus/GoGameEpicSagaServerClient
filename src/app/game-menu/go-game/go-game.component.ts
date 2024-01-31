@@ -1,9 +1,11 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component, NgZone } from '@angular/core';
 import { GoCellComponent } from "./go-cell/go-cell.component";
 import { CommonModule } from '@angular/common';
 import { GameService } from '../game.service';
 import { first } from 'rxjs';
 import { GoHomeButtonComponent } from "../../go-home-button/go-home-button.component";
+import { MatDialog } from '@angular/material/dialog';
+import { EndGameDialogComponent } from '../end-game-dialog/end-game-dialog.component';
 
 @Component({
     selector: 'app-go-game',
@@ -18,7 +20,7 @@ export class GoGameComponent {
   grid!: string;
   coordinates: {x: number, y: number}[] = [];
 
-  constructor(private gameService: GameService) {}
+  constructor(private gameService: GameService, public dialog: MatDialog, private ngZone: NgZone) {}
 
   ngOnInit() {
     this.size = parseInt(localStorage.getItem('boardSize')!);
@@ -31,7 +33,14 @@ export class GoGameComponent {
     }
 
     this.gameService.getGameEndStatistics().pipe(first()).subscribe(model => {
-      model.winnerColor == this.playerColor ? alert("You won!") : alert("You lost!")
+      console.log(model)
+      this.ngZone.run(() => {
+        const dialogRef = this.dialog.open(EndGameDialogComponent, {
+          data: { hasPlayerWon: model.winnerColor == this.playerColor, blackScore: model.blackScore, whiteScore: model.whiteScore },
+          width: '500px',
+          height: '350px'
+        });
+      })
     })
   }
 

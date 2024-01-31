@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, NgZone } from '@angular/core';
 import { Router } from '@angular/router';
 import { first } from 'rxjs';
 import { ConfirmGoHomeDialogComponent } from './confirm-go-home-dialog/confirm-go-home-dialog.component';
@@ -12,7 +12,7 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrl: './go-home-button.component.scss'
 })
 export class GoHomeButtonComponent {
-  constructor(private router: Router, public dialog: MatDialog) { }
+  constructor(private router: Router, public dialog: MatDialog, private ngZone: NgZone) { }
   @Input() warningText!: string;
 
   redirectHome() {
@@ -26,7 +26,9 @@ export class GoHomeButtonComponent {
 
       dialogRef.afterClosed().pipe(first()).subscribe(result => {
         if(result) {
-          this.router.navigate(['/']);
+          this.ngZone.run(() => {
+            this.router.navigate(['/']);
+          })
         }
       });
     }
