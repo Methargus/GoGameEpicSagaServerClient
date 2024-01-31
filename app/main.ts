@@ -103,10 +103,16 @@ function defineHandlers() {
   let clientHash = ""
   win!.webContents.on('did-finish-load', () => {
     client.on('data', (data) => {
-      console.log(data.toString());
 
       let parsedData = JSON.parse(data.toString().split("#END_JSON#")[0])
       win!.webContents.send(parsedData.eventName, parsedData)
+
+      console.log(data.toString().split("#END_JSON#")[1].trim())
+      if(data.toString().split("#END_JSON#")[1].trim())
+      {
+        let parsedData2 = JSON.parse(data.toString().split("#END_JSON#")[1])
+        win!.webContents.send(parsedData2.eventName, parsedData2)
+      }
 
       if(parsedData.eventName == "PlayerAssignEvent") {
         clientHash = parsedData.clientHash

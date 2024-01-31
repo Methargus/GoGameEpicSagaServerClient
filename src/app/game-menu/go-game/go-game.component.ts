@@ -37,7 +37,7 @@ export class GoGameComponent {
       this.ngZone.run(() => {
         const dialogRef = this.dialog.open(EndGameDialogComponent, {
           data: { hasPlayerWon: model.winnerColor == this.playerColor, blackScore: model.blackScore, whiteScore: model.whiteScore, gameHash: model.gameHash },
-          width: '500px',
+          width: '700px',
           height: '350px'
         });
       })
