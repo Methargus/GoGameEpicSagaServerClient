@@ -22,7 +22,7 @@ export class GoCellComponent implements AfterViewInit {
   fieldWidth = 20;
   fieldHeight = 20;
 
-  scale = 1/3;
+  scale = 2/3;
 
   constructor(private cdr: ChangeDetectorRef) {}
 

@@ -21,6 +21,7 @@ export class ReplayGameBoardComponent implements OnDestroy {
   coordinates: {x: number, y: number}[] = []
   size!: number
 
+  done = false
   detected = false
   constructor(private replayService: ReplayService, private cdr: ChangeDetectorRef) { }
 
@@ -28,15 +29,18 @@ export class ReplayGameBoardComponent implements OnDestroy {
     this.requestBoardOfGivenTurn.subscribe(turn => {
       this.replayService.getGameBoardOfGivenTurn(this.gameHash, turn).pipe(first()).subscribe(boardModel => {
         this.board = boardModel.board;
-        this.size = boardModel.board.length;
-        this.cdr.detectChanges();
 
-        for (let i = 0; i < this.size-1; i++) {
-          for (let j = 0; j < this.size-1; j++) {
-            this.coordinates[i*(this.size-1) + j] = {x: j, y: i};
+        if(!this.done) {
+          this.size = boardModel.board.length;
+          this.cdr.detectChanges();
+
+          for (let i = 0; i < this.size-1; i++) {
+            for (let j = 0; j < this.size-1; j++) {
+              this.coordinates[i*(this.size-1) + j] = {x: j, y: i};
+            }
           }
+          this.done = true;
         }
-
         this.cdr.detectChanges();
       })
     })
