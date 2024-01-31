@@ -42,11 +42,6 @@ export class ReplayCellFieldComponent {
 
     this.width = this.goCell.nativeElement.getBoundingClientRect().width - (this.fieldWidth/2 + 2); //  + border
     this.height = this.goCell.nativeElement.getBoundingClientRect().height - (this.fieldHeight/2 + 2);
-
-    // console.log(this.goCell.nativeElement.getBoundingClientRect().height)
-    // console.log("--")
-    // console.log(this.height)
-    // this.cdr.detectChanges();
   }
 
   getPlayerColor(x:number , y:number) {

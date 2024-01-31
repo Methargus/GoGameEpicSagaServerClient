@@ -52,10 +52,10 @@ export class GameService {
     this.electronService.ipcRenderer.send('GiveUpMessageModel', {giveUp: true});
   }
 
-  getGameEndStatistics() : Observable<{ winnerColor: string, blackScore: number, whiteScore: number }> {
+  getGameEndStatistics() : Observable<{ winnerColor: string, blackScore: number, whiteScore: number, gameHash: string }> {
     return new Observable(subscriber => {
       this.electronService.ipcRenderer.on('GameEndStatisticsEvent', (event, arg) => {
-        subscriber.next({ winnerColor: arg.winnerColor, blackScore: arg.blackScore, whiteScore: arg.whiteScore })
+        subscriber.next({ winnerColor: arg.winnerColor, blackScore: arg.blackScore, whiteScore: arg.whiteScore, gameHash: arg.gameHash })
       })
     })
   }

@@ -13,9 +13,6 @@ export class EndGameDialogComponent {
   blackScore: number
   whiteScore: number
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: { hasPlayerWon: boolean; blackScore: number; whiteScore: number; }, public dialogRef: MatDialogRef<EndGameDialogComponent>) {
-    this.hasPlayerWon = data.hasPlayerWon
-    this.blackScore = data.blackScore
-    this.whiteScore = data.whiteScore
+  constructor(@Inject(MAT_DIALOG_DATA) public data: { hasPlayerWon: boolean; blackScore: number; whiteScore: number; gameHash: string}, public dialogRef: MatDialogRef<EndGameDialogComponent>) {
   }
 }

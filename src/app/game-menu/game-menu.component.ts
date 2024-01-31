@@ -46,7 +46,6 @@ export class GameMenuComponent implements OnInit {
 
   joinQueue() {
     this.inQueue = true
-    console.log(this.pvp)
     this.gameService.sendJoinQueueRequest(this.gameBoardSize, this.pvp)
   }
 

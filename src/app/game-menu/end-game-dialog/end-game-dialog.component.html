@@ -1,8 +1,9 @@
 <div style="display: flex; flex-direction: column; justify-content: space-evenly; height:100%; width:100%; align-items: center;">
-    <h1 mat-dialog-title>{{ hasPlayerWon ? "You won!" : "You lost."  }}</h1>
+    <h1 mat-dialog-title>{{ data.hasPlayerWon ? "You won!" : "You lost."  }}</h1>
     <div mat-dialog-content style="text-align:center">
-        <span style="display:block">White Score: {{whiteScore}}</span>
-        <span style="display:block">Black Score: {{blackScore}}</span>
+        <span style="display:block">Game Hash: {{data.gameHash}}</span>
+        <span style="display:block">White Score: {{data.whiteScore}}</span>
+        <span style="display:block">Black Score: {{data.blackScore}}</span>
     </div>
     <div mat-dialog-actions>
     <button mat-button (click)="dialogRef.close(true)">OK</button>

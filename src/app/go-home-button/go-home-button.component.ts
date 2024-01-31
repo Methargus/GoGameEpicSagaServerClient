@@ -1,6 +1,6 @@
-import { Component, Input, NgZone } from '@angular/core';
+import { Component, EventEmitter, Input, NgZone, Output } from '@angular/core';
 import { Router } from '@angular/router';
-import { first } from 'rxjs';
+import { Observable, first } from 'rxjs';
 import { ConfirmGoHomeDialogComponent } from './confirm-go-home-dialog/confirm-go-home-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 
@@ -13,6 +13,7 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class GoHomeButtonComponent {
   constructor(private router: Router, public dialog: MatDialog, private ngZone: NgZone) { }
+  @Output() dialogClosed$ = new EventEmitter<boolean>();
   @Input() warningText!: string;
 
   redirectHome() {
@@ -23,9 +24,10 @@ export class GoHomeButtonComponent {
         width: '500px',
         height: '350px'
       });
-
+      
       dialogRef.afterClosed().pipe(first()).subscribe(result => {
         if(result) {
+          this.dialogClosed$.emit(true);
           this.ngZone.run(() => {
             this.router.navigate(['/']);
           })
